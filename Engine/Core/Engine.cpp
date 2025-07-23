@@ -2,10 +2,6 @@
 #include <iostream>
 #include <Windows.h>
 
-// 윈도우즈
-// 단순 입력 처리
-// ✅타이머 (시간 계산)
-
 Engine::Engine()
 {
 }
@@ -51,14 +47,37 @@ void Engine::Run()
 		// 프레임 제한
 		if (deltaTime >= oneFrameTime)
 		{
-			Update(deltaTime);
+			Tick(deltaTime);
 			Render();
 
 			// 시간 업데이트
 			previousTime = currentTime;
+		
+			// 현재 프레임의 입력을 기록
+			for (int ix = 0; ix < 255; ++ix)
+			{
+				keyStates[ix].previousKeyDown = keyStates[ix].isKeyDown;
+				keyStates[ix].isKeyDown = false;
+			}
 		}
 	}
 }
+
+bool Engine::GetKey(int keyCode)
+{
+	return keyStates[keyCode].isKeyDown;
+}
+
+bool Engine::GetKeyDown(int keyCode)
+{
+	return keyStates[keyCode].isKeyDown && !keyStates[keyCode].previousKeyDown;
+}
+
+bool Engine::GetKeyUp(int keyCode)
+{
+	return !keyStates[keyCode].isKeyDown && keyStates[keyCode].previousKeyDown;
+}
+
 
 void Engine::Quit()
 {
@@ -67,16 +86,36 @@ void Engine::Quit()
 
 void Engine::ProcessInput()
 {
+	// 키 입력 확인
+	for (int ix = 0; ix < 255; ++ix)
+	{
+		keyStates[ix].isKeyDown = GetAsyncKeyState(ix) & 0x8000;
+	}
+
+}
+
+void Engine::Tick(float deltaTime)
+{
+	//std::cout << "FPS : " << 1.f / deltaTime << std::endl;
+
+	//if (GetKeyDown('A'))
+	//{
+	//	std::cout << "Key Down\n";
+	//}
+	//if (GetKey('A'))
+	//{
+	//	std::cout << "Key\n";
+	//}
+	//if (GetKeyUp('A'))
+	//{
+	//	std::cout << "Key Up\n";
+	//}
+
 	// ESC 키 눌림 확인
-	if (GetAsyncKeyState(VK_ESCAPE)&0x8000)
+	if (GetKeyDown(VK_ESCAPE))
 	{
 		Quit();
 	}
-}
-
-void Engine::Update(float deltaTime)
-{
-	std::cout << "FPS : " << 1.f / deltaTime << std::endl;
 }
 
 void Engine::Render()

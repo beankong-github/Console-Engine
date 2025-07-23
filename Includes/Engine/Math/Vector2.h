@@ -22,4 +22,5 @@ private:
 	int y = 0;
 
 	char* stringBuffer = nullptr;
+
 };
