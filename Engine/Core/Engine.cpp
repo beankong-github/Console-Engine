@@ -1,6 +1,7 @@
 ﻿#include "Engine.h"
 #include <iostream>
 #include <Windows.h>
+#include "Level/Level.h"
 
 Engine::Engine()
 {
@@ -8,6 +9,11 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+	if (mainLevel)
+	{
+		delete mainLevel;
+		mainLevel = nullptr;
+	}
 }
 
 void Engine::Run()
@@ -47,6 +53,7 @@ void Engine::Run()
 		// 프레임 제한
 		if (deltaTime >= oneFrameTime)
 		{
+			BeginPlay();
 			Tick(deltaTime);
 			Render();
 
@@ -63,17 +70,27 @@ void Engine::Run()
 	}
 }
 
-bool Engine::GetKey(int keyCode)
+void Engine::AddLevel(Level* newLevel)
+{
+	// 기존 레벨 제거
+	if (mainLevel)
+	{
+		delete mainLevel;
+	}
+	mainLevel = newLevel;
+}
+
+bool Engine::GetKey(int keyCode) const
 {
 	return keyStates[keyCode].isKeyDown;
 }
 
-bool Engine::GetKeyDown(int keyCode)
+bool Engine::GetKeyDown(int keyCode) const
 {
 	return keyStates[keyCode].isKeyDown && !keyStates[keyCode].previousKeyDown;
 }
 
-bool Engine::GetKeyUp(int keyCode)
+bool Engine::GetKeyUp(int keyCode) const
 {
 	return !keyStates[keyCode].isKeyDown && keyStates[keyCode].previousKeyDown;
 }
@@ -94,6 +111,14 @@ void Engine::ProcessInput()
 
 }
 
+void Engine::BeginPlay()
+{
+	if (mainLevel)
+	{
+		mainLevel->BeginPlay();
+	}
+}
+
 void Engine::Tick(float deltaTime)
 {
 	//std::cout << "FPS : " << 1.f / deltaTime << std::endl;
@@ -111,6 +136,12 @@ void Engine::Tick(float deltaTime)
 	//	std::cout << "Key Up\n";
 	//}
 
+	// 레벨 업데이트
+	if (mainLevel)
+	{
+		mainLevel->Tick(deltaTime);
+	}
+
 	// ESC 키 눌림 확인
 	if (GetKeyDown(VK_ESCAPE))
 	{
@@ -120,4 +151,8 @@ void Engine::Tick(float deltaTime)
 
 void Engine::Render()
 {
+	if (mainLevel)
+	{
+		mainLevel->Render();
+	}
 }

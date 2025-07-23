@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.h"
 #include "Math/Vector2.h"
 
 // TODO : 250723
@@ -6,7 +7,7 @@
 // 콘솔에 그리기
 // 엔진의 이벤트 함수 호출 (Begin / Tick / Render)
 
-class Actor
+class Engine_API Actor
 {
 
 public:
