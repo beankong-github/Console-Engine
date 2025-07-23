@@ -147,11 +147,13 @@ xcopy $(OutDir)\*.dll ..\Lib\Engine\ /y /e </Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\Engine.h" />
     <ClInclude Include="Math\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Actor.cpp" />
     <ClCompile Include="Core\Engine.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
   </ItemGroup>

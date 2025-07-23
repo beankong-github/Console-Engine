@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include "Core.h"
 
 /* TODO : 250723 
-	- Å° ÀÔ·Â °ü¸® (KeyState ¹è¿­)
-	- ÀÔ·Â È®ÀÎ ÇÔ¼ö (GetKeyDown, GetKeyUp)
-	- Entitiy Ãß°¡
-	- ÀÌº¥Æ® ÇÔ¼ö Ãß°¡ (BeginPlay, Tick, Render)
-	- ·¹º§ Ãß°¡ (°¡»ó °ø°£¿¡ ¹èÄ¡µÈ ¹°Á¦ °ü¸® °´Ã¼)
+	âœ… í‚¤ ì…ë ¥ ê´€ë¦¬ (KeyState ë°°ì—´)
+	âœ… ì…ë ¥ í™•ì¸ í•¨ìˆ˜ (GetKeyDown, GetKeyUp)
+	âœ… Actor ì¶”ê°€
+	âœ… ì´ë²¤íŠ¸ í•¨ìˆ˜ ì¶”ê°€ (BeginPlay, Tick, Render)
+	- ë ˆë²¨ ì¶”ê°€ (ê°€ìƒ ê³µê°„ì— ë°°ì¹˜ëœ ë¬¼ì œ ê´€ë¦¬ ê°ì²´)
 */
 
 class Engine_API Engine
@@ -14,23 +14,23 @@ class Engine_API Engine
 
 	struct KeyState
 	{
-		// ÇöÀç ÇÁ·¹ÀÓ¿¡ Å°°¡ ´­·È´ÂÁö
+		// í˜„ì¬ í”„ë ˆì„ì— í‚¤ê°€ ëˆŒë ¸ëŠ”ì§€
 		bool isKeyDown = false;
-		// ÀÌÀü ÇÁ·¹ÀÓ¿¡ Å°°¡ ´­·È´ÂÁö
+		// ì´ì „ í”„ë ˆì„ì— í‚¤ê°€ ëˆŒë ¸ëŠ”ì§€
 		bool previousKeyDown = false;
 	};
 
 public:
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	Engine();
 
-	// ¼Ò¸êÀÚ
+	// ì†Œë©¸ì
 	~Engine();
 	
-	// ¿£Áø ½ÇÇà ÇÔ¼ö
+	// ì—”ì§„ ì‹¤í–‰ í•¨ìˆ˜
 	void Run();
 
-	// Å° È®ÀÎ ÇÔ¼ö
+	// í‚¤ í™•ì¸ í•¨ìˆ˜
 	bool GetKey(int keyCode);
 	bool GetKeyDown(int keyCode);
 	bool GetKeyUp(int keyCode);
@@ -43,9 +43,9 @@ private:
 	void Render();
 
 private:
-	// ¿£Áø Á¾·á ÇÃ·¡±×
+	// ì—”ì§„ ì¢…ë£Œ í”Œë˜ê·¸
 	bool isQuit = false;
 
-	// Å° ÀÔ·Â Á¤º¸ °ü¸® 
+	// í‚¤ ì…ë ¥ ì •ë³´ ê´€ë¦¬ 
 	KeyState keyStates[255] = {};
 };
