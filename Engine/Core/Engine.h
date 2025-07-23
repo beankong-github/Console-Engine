@@ -1,13 +1,6 @@
 ﻿#pragma once
 #include "Core.h"
 
-/* TODO : 250723 
-	✅ 키 입력 관리 (KeyState 배열)
-	✅ 입력 확인 함수 (GetKeyDown, GetKeyUp)
-	✅ Actor 추가
-	✅ 이벤트 함수 추가 (BeginPlay, Tick, Render)
-	✅ 레벨 추가 (가상 공간에 배치된 물제 관리 객체)
-*/
 class Level;
 class Engine_API Engine
 {
