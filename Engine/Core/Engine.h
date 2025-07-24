@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "Core.h"
 
+//Todo : 250724
+//- RTTI 적용(Core)
+//- Engine 싱글톤 구현
+
 class Level;
 class Engine_API Engine
 {
