@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include "Core.h"
 
-//Todo : 250724
-//- RTTI 적용(Core)
+//Todo : 250725
 //- Engine 싱글톤 구현
 
 class Level;
@@ -24,6 +23,8 @@ public:
 	// 소멸자
 	~Engine();
 	
+	static Engine& Get();
+
 	// 엔진 실행 함수
 	void Run();
 
@@ -45,6 +46,9 @@ private:
 	void Render();
 
 private:
+	static Engine* instance;
+	static int count;
+
 	// 엔진 종료 플래그
 	bool isQuit = false;
 

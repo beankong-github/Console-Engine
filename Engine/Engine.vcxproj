@@ -153,6 +153,7 @@ xcopy $(OutDir)\*.dll ..\Lib\Engine\ /y /e </Command>
     <ClInclude Include="Core\RTTI.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="Resource\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Actor.cpp" />

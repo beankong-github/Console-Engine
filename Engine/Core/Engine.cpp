@@ -3,8 +3,21 @@
 #include <Windows.h>
 #include "Level/Level.h"
 
+// 정적 변수 초기화
+Engine* Engine::instance = nullptr;
+
 Engine::Engine()
 {
+	instance = this;
+
+	// 콘솔 커서 끄기	
+	CONSOLE_CURSOR_INFO info;
+	info.bVisible = false;
+	info.dwSize = 1;
+	SetConsoleCursorInfo(
+		GetStdHandle(STD_OUTPUT_HANDLE)
+		, &info
+	);
 }
 
 Engine::~Engine()
@@ -14,6 +27,12 @@ Engine::~Engine()
 		delete mainLevel;
 		mainLevel = nullptr;
 	}
+}
+
+Engine& Engine::Get()
+{
+	// TODO: insert return statement here
+	return *instance;
 }
 
 void Engine::Run()
@@ -40,7 +59,13 @@ void Engine::Run()
 	{
 		if (isQuit)
 		{
-			std::cout << "Shutdown the engine" << std::endl;
+			// 정리
+			SetConsoleTextAttribute(
+				GetStdHandle(STD_OUTPUT_HANDLE)
+				, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
+			);
+
+			std::cout << "\nShutdown the engine" << std::endl;
 			break;
 		}
 		// 프레임 시간 계산
@@ -68,6 +93,7 @@ void Engine::Run()
 			}
 		}
 	}
+
 }
 
 void Engine::AddLevel(Level* newLevel)
@@ -143,14 +169,20 @@ void Engine::Tick(float deltaTime)
 	}
 
 	// ESC 키 눌림 확인
-	if (GetKeyDown(VK_ESCAPE))
-	{
-		Quit();
-	}
+	//if (GetKeyDown(VK_ESCAPE))
+	//{
+	//	Quit();
+	//}
 }
 
 void Engine::Render()
 {
+	// 정리
+	SetConsoleTextAttribute(
+		GetStdHandle(STD_OUTPUT_HANDLE)
+		, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
+	);
+
 	if (mainLevel)
 	{
 		mainLevel->Render();

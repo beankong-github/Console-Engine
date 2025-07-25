@@ -33,6 +33,9 @@
     <ClInclude Include="Core\RTTI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Engine.cpp">
