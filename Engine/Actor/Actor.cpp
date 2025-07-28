@@ -67,3 +67,13 @@ Actor::~Actor()
  {
 	 return position;
  }
+
+ void Actor::SetSortingOrder(unsigned int sortingOrder)
+ {
+	 this->sortingOrder = sortingOrder;
+ }
+
+ inline int Actor::GetSortingOrder()
+ {
+	 return sortingOrder;
+ }

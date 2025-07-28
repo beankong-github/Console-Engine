@@ -10,16 +10,18 @@
 
 enum Color
 {
-	Blue				= 0x0001,
+	Blue			= 0x0001,
 	Green			= 0x0002,
 	Red				= 0x0004,
-	White			= Blue | Green | Blue,
+	White			= Blue | Green | Red,
 	Intensity	= 0x0008
 };
 
 
 class Engine_API Actor : public RTTI
 {
+	friend class Level;
+
 	RTTI_DECLARATIONS(Actor,RTTI)
 
 public:
@@ -44,9 +46,18 @@ public:
 	void SetPosition(const Vector2& newPosition);
 	inline Vector2 Position() const;
 
+	// Sorting Order 설정
+	void SetSortingOrder(unsigned int sortingOrder);
+	inline int GetSortingOrder();
 private:
+	// 개체의 위치
 	Vector2 position;
+	// 텍스트 색상
 	Color color = Color::White;
+	// 그릴 값
 	char image = ' ';
+	// Begin Play 호출 확인
 	bool hasBeganPlay = false;
+	// 정렬 순서
+	unsigned int sortingOrder = 0;
 };
