@@ -6,6 +6,14 @@ Level::Level()
 
 Level::~Level()
 {
+	// 메모리 해제
+	for (Actor* actor : actors)
+	{
+		SafeDelete(actor);
+	}
+
+	// std::vector 정리
+	actors.clear();
 }
 
 void Level::AddActor(Actor* newActor)

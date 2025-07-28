@@ -12,3 +12,13 @@
 #else
 # define Engine_API __declspec(dllimport)
 #endif
+
+template<typename T>
+void SafeDelete(T*& target)
+{
+	if (target)
+	{
+		delete  target;
+		target = nullptr;
+	}
+}

@@ -2,11 +2,11 @@
 #include <Windows.h>
 #include <iostream>
 
-Actor::Actor(const char image, Color color)
+Actor::Actor(const char image, Color color, const Vector2& position) 
 	: image(image)
 	, color(color)
+	, position(position)
 {
-
 }
 
 Actor::~Actor()
