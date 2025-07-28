@@ -30,7 +30,7 @@ Actor::~Actor()
  void Actor::Render()
 {
 	 // Win32 API
-	 // 커서 위치 이동
+	 // 콘솔 출력을 제어하는 핸들 가져오기
 	 static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	 // 커서 위치 이동
@@ -48,7 +48,7 @@ Actor::~Actor()
 
  void Actor::SetPosition(const Vector2& newPosition)
  {
-	 // 커서 위치 이동
+	 // 콘솔 출력을 제어하는 핸들 가져오기
 	 static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	 // 커서 위치 이동

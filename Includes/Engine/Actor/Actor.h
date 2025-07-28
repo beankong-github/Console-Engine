@@ -10,11 +10,11 @@
 
 enum Color
 {
-	BLUE				= 0x0001,
-	GREEN			= 0x0002,
-	RED				= 0x0004,
-	WHITE			= BLUE | GREEN | BLUE,
-	INTENSITY	= 0x0008
+	Blue				= 0x0001,
+	Green			= 0x0002,
+	Red				= 0x0004,
+	White			= Blue | Green | Blue,
+	Intensity	= 0x0008
 };
 
 
@@ -23,7 +23,7 @@ class Engine_API Actor : public RTTI
 	RTTI_DECLARATIONS(Actor,RTTI)
 
 public:
-	Actor(const char image = ' ', Color color = Color::WHITE);
+	Actor(const char image = ' ', Color color = Color::White);
 	virtual ~Actor();
 
 	// 이벤트 함수
@@ -42,7 +42,7 @@ public:
 
 private:
 	Vector2 position;
-	Color color = Color::WHITE;
+	Color color = Color::White;
 	char image = ' ';
 	bool hasBeganPlay = false;
 };
