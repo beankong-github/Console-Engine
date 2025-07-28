@@ -5,7 +5,7 @@
 #include <Windows.h>
 
 TestActor::TestActor()
-	:Super('O', Color::RED)
+	:Super('O', Color::Red)
 {
 
 }
