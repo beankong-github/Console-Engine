@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include <Windows.h>
 #include <iostream>
+#include "Utils/Utils.h"
 
 Actor::Actor(const char image, Color color, const Vector2& position) 
 	: image(image)
@@ -31,16 +32,18 @@ Actor::~Actor()
 {
 	 // Win32 API
 	 // 콘솔 출력을 제어하는 핸들 가져오기
-	 static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	 // static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	 // 커서 위치 이동
 	 COORD coordinate;
 	 coordinate.X = (short)position.x;
 	 coordinate.Y = (short)position.y;
-	 SetConsoleCursorPosition(handle, coordinate);
+	 Utils::SetConsolePosition(coordinate);
+	 //SetConsoleCursorPosition(handle, coordinate);
 	
-	 // 색상 변환F
-	 SetConsoleTextAttribute(handle , color);
+	 // 색상 변환
+	//SetConsoleTextAttribute(handle, color);
+	 Utils::SetConsoleColor(static_cast<WORD>(color));
 
 	// 그리기
 	 std::cout << image;
@@ -49,13 +52,14 @@ Actor::~Actor()
  void Actor::SetPosition(const Vector2& newPosition)
  {
 	 // 콘솔 출력을 제어하는 핸들 가져오기
-	 static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	 //static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	 // 커서 위치 이동
 	 COORD coordinate;
 	 coordinate.X = (short)position.x;
 	 coordinate.Y = (short)position.y;
-	 SetConsoleCursorPosition(handle, coordinate);
+	 //SetConsoleCursorPosition(handle, coordinate);
+	 Utils::SetConsolePosition(coordinate);
 
 	 // 그리기
 	 std::cout << ' ';

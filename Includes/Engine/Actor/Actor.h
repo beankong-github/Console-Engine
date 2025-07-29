@@ -3,11 +3,6 @@
 #include "Math/Vector2.h"
 #include "RTTI.h"
 
-// TODO : 250723
-// 위치
-// 콘솔에 그리기
-// 엔진의 이벤트 함수 호출 (Begin / Tick / Render)
-
 enum Color
 {
 	Blue			= 0x0001,

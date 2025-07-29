@@ -1,21 +1,10 @@
 ﻿#pragma once
 #include "Core.h"
-
-//Todo : 250725
-//- Engine 싱글톤 구현
+#include "Input.h"
 
 class Level;
 class Engine_API Engine
 {
-
-	struct KeyState
-	{
-		// 현재 프레임에 키가 눌렸는지
-		bool isKeyDown = false;
-		// 이전 프레임에 키가 눌렸는지
-		bool previousKeyDown = false;
-	};
-
 public:
 	// 생성자
 	Engine();
@@ -31,16 +20,13 @@ public:
 	// 레벨 추가
 	void AddLevel(Level* newLevel);
 
+	// 메모리 해제 함수
+	void CleanUp();
 
-	// 키 확인 함수
-	inline bool GetKey(int keyCode) const;
-	inline bool GetKeyDown(int keyCode)const;
-	inline bool GetKeyUp(int keyCode) const;
-
+	// 종료 함수
 	void Quit();
 
 private:
-	void  ProcessInput();
 	void BeginPlay();
 	void Tick(float deltaTime = 0.f);
 	void Render();
@@ -52,8 +38,8 @@ private:
 	// 엔진 종료 플래그
 	bool isQuit = false;
 
-	// 키 입력 정보 관리 
-	KeyState keyStates[255] = {};
+	// 입력 관리자
+	Input input;
 
 	// 메인 레벨
 	Level* mainLevel = nullptr;
