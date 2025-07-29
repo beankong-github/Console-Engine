@@ -50,7 +50,6 @@ Engine::~Engine()
 
 Engine& Engine::Get()
 {
-	// TODO: insert return statement here
 	return *instance;
 }
 

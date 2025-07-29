@@ -42,7 +42,7 @@ void Level::BeginPlay()
 void Level::Tick(float deltaTime)
 {
 	// 창 종료 확인
-	QuitGame();
+	//QuitGame();
 
 	for (Actor* const actor : actors)
 	{

@@ -21,10 +21,12 @@ public:
 
 private:
 	void SortActorsBySortingOrder();
+
+protected:
 	void QuitGame();
 
 
-private:
+protected:
 	std::vector<Actor*> actors;
 
 };

@@ -10,7 +10,7 @@ public:
 	Engine();
 
 	// 소멸자
-	~Engine();
+	virtual ~Engine();
 	
 	static Engine& Get();
 
@@ -21,7 +21,7 @@ public:
 	void AddLevel(Level* newLevel);
 
 	// 메모리 해제 함수
-	void CleanUp();
+	virtual void CleanUp();
 
 	// 종료 함수
 	void Quit();
@@ -31,7 +31,7 @@ private:
 	void Tick(float deltaTime = 0.f);
 	void Render();
 
-private:
+protected:
 	static Engine* instance;
 	static int count;
 
