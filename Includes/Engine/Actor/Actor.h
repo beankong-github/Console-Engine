@@ -12,7 +12,7 @@ enum Color
 	Intensity	= 0x0008
 };
 
-
+class Level;
 class Engine_API Actor : public RTTI
 {
 	friend class Level;
@@ -44,6 +44,10 @@ public:
 	// Sorting Order 설정
 	void SetSortingOrder(unsigned int sortingOrder);
 	inline int GetSortingOrder();
+
+	// 오너십 설정
+	void SetOwner(Level* newOwner);
+	Level* GetOwner() const;
 private:
 	// 개체의 위치
 	Vector2 position;
@@ -55,4 +59,6 @@ private:
 	bool hasBeganPlay = false;
 	// 정렬 순서
 	unsigned int sortingOrder = 0;
+	// 속한 레벨
+	Level* owner;
 };

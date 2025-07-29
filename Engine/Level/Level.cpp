@@ -1,5 +1,9 @@
 #include "Level.h"
 #include "Actor/Actor.h"
+#include "Input.h"
+#include "Engine.h"
+#include <Windows.h>
+
 Level::Level()
 {
 }
@@ -36,6 +40,9 @@ void Level::BeginPlay()
 }
 void Level::Tick(float deltaTime)
 {
+	// 창 종료 확인
+	QuitGame();
+
 	for (Actor* const actor : actors)
 	{
 		actor->Tick(deltaTime);
@@ -87,5 +94,15 @@ void Level::SortActorsBySortingOrder()
 				std::swap(actors[j], actors[j + 1]);
 			}
 		}
+	}
+}
+
+void Level::QuitGame()
+{
+	// 입력처리
+	if (Input::Get().GetKeyDown(VK_ESCAPE))
+	{
+		Engine::Get().Quit();
+		return;
 	}
 }

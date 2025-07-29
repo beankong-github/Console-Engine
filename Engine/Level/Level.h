@@ -21,6 +21,8 @@ public:
 
 private:
 	void SortActorsBySortingOrder();
+	void QuitGame();
+
 
 private:
 	std::vector<Actor*> actors;

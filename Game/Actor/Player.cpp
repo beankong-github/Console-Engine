@@ -14,12 +14,6 @@ void Player::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
 	
-	// 입력처리
-	if (Input::Get().GetKeyDown(VK_ESCAPE))
-	{
-		Engine::Get().Quit();
-		return;
-	}
 	if (Input::Get().GetKeyDown(VK_RIGHT))
 	{
 		Vector2 position = Position();

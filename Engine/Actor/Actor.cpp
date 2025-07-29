@@ -81,3 +81,15 @@ Actor::~Actor()
  {
 	 return sortingOrder;
  }
+
+ void Actor::SetOwner(Level* newOwner)
+ {
+	 owner = newOwner;
+ }
+
+ Level* Actor::GetOwner() const
+ {
+	 return owner;
+ }
+
+
