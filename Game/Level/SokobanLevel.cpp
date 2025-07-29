@@ -14,6 +14,11 @@ SokobanLevel::SokobanLevel()
 	ReadMapFile("Map.txt");
 }
 
+bool SokobanLevel::CanPlayerMove(const Vector2& curPosition, const Vector2& newPosition)
+{
+	return true;
+}
+
 void SokobanLevel::ReadMapFile(const char* filename)
 {
 	// 최종 에셋 경로 완성

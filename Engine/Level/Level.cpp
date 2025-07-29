@@ -23,6 +23,7 @@ Level::~Level()
 void Level::AddActor(Actor* newActor)
 {
 	 // TODO : 예외 처리 필요 (중복확인)
+	newActor->SetOwner(this);
 	actors.emplace_back(newActor);
 }
 

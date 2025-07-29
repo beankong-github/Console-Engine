@@ -48,6 +48,10 @@ public:
 	// 오너십 설정
 	void SetOwner(Level* newOwner);
 	Level* GetOwner() const;
+	
+	// 게임 종료
+	void QuitGame();
+
 private:
 	// 개체의 위치
 	Vector2 position;

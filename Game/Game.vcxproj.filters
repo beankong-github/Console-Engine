@@ -68,5 +68,8 @@
     <ClInclude Include="Actor\Target.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Interface\ICanPlayerMove.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
