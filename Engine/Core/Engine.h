@@ -2,6 +2,13 @@
 #include "Core.h"
 #include "Input.h"
 
+// 엔진 설정 구조채
+struct EngineSettings
+{
+	int width = 0;
+	int height = 0;
+	float framerate = 0.f;
+};
 class Level;
 class Engine_API Engine
 {
@@ -31,8 +38,13 @@ private:
 	void Tick(float deltaTime = 0.f);
 	void Render();
 
+	// 엔진 설정 로드 함수
+	void LoadEngineSettings();
+
+
 protected:
 	static Engine* instance;
+	EngineSettings settings;
 	static int count;
 
 	// 엔진 종료 플래그

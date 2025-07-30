@@ -1,6 +1,7 @@
 ﻿#include "Engine.h"
 #include <iostream>
 #include <Windows.h>
+
 #include "Level/Level.h"
 #include "Utils/Utils.h"
 #include "Input.h"
@@ -40,6 +41,9 @@ Engine::Engine()
 
 	// Console 이벤트 발생시 호출 될 콜백 함수 등록
 	SetConsoleCtrlHandler(ConsoleMessageProcedure, TRUE);
+
+	// 엔진 설정 로드
+	LoadEngineSettings();
 }
 
 Engine::~Engine()
@@ -69,7 +73,7 @@ void Engine::Run()
 	QueryPerformanceFrequency(&frequency);
 
 	// 타겟 프레임 지정
-	float targetFrameRate = 60.f;
+	float targetFrameRate =  settings.framerate == 0.f? 60.f  : settings.framerate;
 	float oneFrameTime = 1.0f / targetFrameRate;
 
 	// GameLoop
@@ -100,6 +104,12 @@ void Engine::Run()
 			BeginPlay();
 			Tick(deltaTime);
 			Render();
+
+			// 제목에 fps 출력
+			char title[50] = {};
+			sprintf_s(title, 50, "DeltaTime : %f", deltaTime);
+			SetConsoleTitleA(title);
+
 
 			// 시간 업데이트
 			previousTime = currentTime;
@@ -190,4 +200,70 @@ void Engine::Render()
 	{
 		mainLevel->Render();
 	}
+}
+
+void Engine::LoadEngineSettings()
+{
+	//엔진 설정 파일 열기
+	FILE* file = nullptr;
+	fopen_s(&file, "../Settings/EngineSettings.txt", "rt");
+	if (file == nullptr)
+	{
+		std::cout << "Failed to load engine settings.\n";
+		__debugbreak;
+		return;
+	}
+
+	// 로드
+	// FP(File Position) 포인터를 가장 뒤로 옮기기
+	fseek(file, 0, SEEK_END);
+	// 이 위치 구하기
+	size_t fileSize = ftell(file);
+	// 다시 첫 위치로
+	rewind(file); // fseek(file, 0, SEEK_SET);
+
+	// 파일 내용을 저장할 버퍼할당
+	char* buffer = new  char[fileSize + 1];
+	memset(buffer, 0, fileSize + 1);
+
+	// 내용 읽기
+	size_t readSize = fread(buffer, sizeof(char), fileSize, file);
+
+	// 파싱(parsing, 구문해석)
+	char* context = nullptr;
+	char* token = nullptr;
+	token = strtok_s(buffer, "\n", &context);
+
+	// 구문 분석
+	while (token != nullptr)
+	{
+		// 키와 값 분리
+		char header[10] = {};
+
+		// 이 함수가 제대로 동작하려면 키와 값 사이의 빈칸이 있어야 함
+		sscanf_s(token, "%s", header, 10);
+
+		if (strcmp(header, "framerate") == 0)
+		{
+			sscanf_s(token, "framerate = %f", &settings.framerate);
+		}	
+		else if (strcmp(header, "width") == 0)
+		{
+			sscanf_s(token, "width = %d", &settings.width);
+		}
+		else if (strcmp(header, "height") == 0)
+		{
+			sscanf_s(token, "height = %d", &settings.height);
+		}
+
+		// 그 다음 줄 분리
+		token = strtok_s(nullptr, "\n", &context);
+
+	}
+
+	// 파일 내용 할당 해제
+	SafeDeleteArray(buffer);
+
+	// 파일 닫기
+	fclose(file);
 }
